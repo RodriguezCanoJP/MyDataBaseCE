@@ -1,1 +1,16 @@
+<table class="table table-bordered table-hover">    
+    <thead> 
+      <tr>
+        <th *ngFor="let item of xmlItems[0]">{{item[0]}}</th>
+      </tr>    
+    </thead>    
+    <tr *ngFor="let item of xmlItems">    
+      <td>{{item[0][1]}}</td>    
+      <td>{{item[1][1]}}</td>    
+      <td>{{item[2][1]}}</td>    
+      <td>{{item[3][1]}}</td>    
+      <td>{{item[4][1]}}</td>  
+      <td>{{item[5][1]}}</td>  
+    </tr>    
+</table> 
 

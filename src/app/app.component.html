@@ -20,7 +20,7 @@
     <div class="card" id="tree">
     </div>
     <div class="card" id="input">
-      <textarea>
+      <textarea [value]="name" (input)="onValueChange($event)">
       </textarea>
     </div>
   </div>

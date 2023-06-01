@@ -8,6 +8,7 @@ import { ParsingService } from '../parsing.service';
 })
 export class XmltableComponent implements OnInit{
   public xmlItems: any;
+  public displayedColumns: any;
 
   constructor(private service: ParsingService){}
 
@@ -15,8 +16,11 @@ export class XmltableComponent implements OnInit{
     this.service.loadXML().subscribe(data => {  
       this.service.parseXML(data)  
         .then(parsed_data => {  
-           this.xmlItems =  parsed_data;  
+          this.xmlItems =  parsed_data; 
+          this.displayedColumns = Object.keys(this.xmlItems[0]);
         });  
     });
+
+    
   }
 }

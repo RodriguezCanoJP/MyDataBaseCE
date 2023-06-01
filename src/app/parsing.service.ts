@@ -10,7 +10,7 @@ export class ParsingService {
   constructor(private _http: HttpClient) {}
 
   loadXML(){  
-    return this._http.get('/assets/objeto.xml',  
+    return this._http.get('/assets/objeto2.xml',  
       {  
         headers: new HttpHeaders()  
           .set('Content-Type', 'text/xml')  
@@ -37,8 +37,7 @@ export class ParsingService {
         const objs = store[groupString];//Objects array
 
         objs.forEach((obj: { [s: string]: unknown; } | ArrayLike<unknown>) =>{
-          var listed = Object.entries(obj);//lsit of key-value pairs
-          arr.push(listed);
+          arr.push(obj);
         })
       
         resolve(arr);  

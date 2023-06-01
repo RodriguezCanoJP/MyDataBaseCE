@@ -41,18 +41,13 @@ p {
     margin: 0 16px;
 }
 
-.toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 8px;
-}
-
-.toolbar #youtube-logo {
+.toolbar #github-logo {
     height: 40px;
     margin: 0 16px;
 }
 
-.toolbar #twitter-logo:hover,
-.toolbar #youtube-logo:hover {
+.toolbar #jira-logo:hover,
+.toolbar #github-logo:hover {
     opacity: 0.8;
 }
 
@@ -100,21 +95,6 @@ textarea{
     flex:1;
 }
 
-svg.material-icons {
-    height: 24px;
-    width: auto;
-}
-
-svg.material-icons:not(:last-child) {
-    margin-right: 8px;
-}
-
-.card svg.material-icons path {
-    fill: #888;
-}
-
-
-
 a,
 a:visited,
 a:hover {
@@ -124,30 +104,4 @@ a:hover {
 
 a:hover {
     color: #125699;
-}
-
-.circle-link {
-    height: 40px;
-    width: 40px;
-    border-radius: 40px;
-    margin: 8px;
-    background-color: white;
-    border: 1px solid #eeeeee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: 1s ease-out;
-}
-
-
-/* Responsive Styles */
-@media screen and (max-width: 767px) {
-.card-container > *:not(.circle-link) ,
-.terminal {
-    width: 100%;
-}
-
-
 }

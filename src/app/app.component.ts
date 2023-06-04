@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'mydatabase';
 
-  public name = '';
-
-  public onValueChange(event: Event): void {
-    const value = (event.target as any).value;
-    this.name = value;
-  }
+  public script = 'objeto' ;
 
 }

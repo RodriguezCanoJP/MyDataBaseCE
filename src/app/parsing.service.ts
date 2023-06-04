@@ -9,8 +9,8 @@ export class ParsingService {
 
   constructor(private _http: HttpClient) {}
 
-  loadXML(){  
-    return this._http.get('/assets/objeto2.xml',  
+  loadXML(file:string){  
+    return this._http.get('/assets/' + file + '.xml',  
       {  
         headers: new HttpHeaders()  
           .set('Content-Type', 'text/xml')  

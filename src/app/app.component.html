@@ -6,6 +6,8 @@
     src="./assets/logo.png"
   />
   <span>MyDataBaseCE</span>
+  <div class="spacer" onclick=""></div>
+  <button class="button" (click)="child.showTable()">Run</button>
   <div class="spacer"></div>
   <a aria-label="MyDataBaseCE Github" target="_blank" rel="noopener" href="https://github.com/RodriguezCanoJP/MyDataBaseCE" title="Github">
     <svg id="github-logo" ngxmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -20,13 +22,13 @@
     <div class="card" id="tree">
     </div>
     <div class="card" id="input">
-      <textarea [value]="name" (input)="onValueChange($event)">
+      <textarea [ngModel]="script" (ngModelChange)="script=$event">
       </textarea>
     </div>
   </div>
   <div class="card-container display">
     <div class="card" id="display">
-      <app-xmltable></app-xmltable>
+      <app-xmltable #child [name]="script"></app-xmltable>
     </div>
   </div>
 </div>

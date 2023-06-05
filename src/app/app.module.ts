@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { XmltableComponent } from './xmltable/xmltable.component';
 import { ParsingService } from './parsing.service';
+import { ScriptService } from './script.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { ParsingService } from './parsing.service';
     MatTableModule,
     FormsModule
   ],
-  providers: [ParsingService],
+  providers: [ParsingService, ScriptService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

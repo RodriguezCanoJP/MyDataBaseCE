@@ -16,10 +16,9 @@ export class XmltableComponent{
 
   constructor(private service: ParsingService){}
   
-  showTable(filename: string){
-    console.log(filename);
+  showTable(filename: string, columns: string[], conditions: string[], l_operators: string[], operators: string[], values: string[]){
     this.service.loadXML(filename).subscribe(data => {  
-      this.service.parseXML(data)  
+      this.service.parseXML(data, columns, conditions, l_operators, operators, values)  
         .then(parsed_data => {  
           this.xmlItems =  parsed_data; 
           this.displayedColumns = Object.keys(this.xmlItems[0]);

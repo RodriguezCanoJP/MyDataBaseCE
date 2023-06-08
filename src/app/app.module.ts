@@ -9,11 +9,13 @@ import { AppComponent } from './app.component';
 import { XmltableComponent } from './xmltable/xmltable.component';
 import { ParsingService } from './parsing.service';
 import { ScriptService } from './script.service';
+import { StoresComponent } from './stores/stores.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    XmltableComponent
+    XmltableComponent,
+    StoresComponent
   ],
   imports: [
     BrowserModule,

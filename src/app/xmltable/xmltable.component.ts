@@ -7,13 +7,9 @@ import { ParsingService } from '../parsing.service';
   styleUrls: ['./xmltable.component.css']
 })
 export class XmltableComponent{
-  @Input()
-  name!: string;
-
   public xmlItems: any;
   public displayedColumns: string[] = [];
   
-
   constructor(private service: ParsingService){}
   
   showTable(filename: string, columns: string[], conditions: string[], l_operators: string[], operators: string[], values: string[]){
@@ -37,5 +33,9 @@ export class XmltableComponent{
       })
     console.log(newColumns);
     return newColumns;   
+  }
+
+  printXML(){
+    this.service.createXML();
   }
 }

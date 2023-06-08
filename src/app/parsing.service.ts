@@ -10,8 +10,8 @@ export class ParsingService {
   constructor(private _http: HttpClient) {}
 
   loadXML(file:string){  
-    return this._http.get('/assets/' + file + '.xml',  
-      {  
+    return this._http.get('/xmlstore/' + file + '.xml',  
+      {
         headers: new HttpHeaders()  
           .set('Content-Type', 'text/xml')  
           .append('Access-Control-Allow-Methods', 'GET')  
@@ -31,12 +31,13 @@ export class ParsingService {
             explicitArray: true  
           });  
       parser.parseString(data, function (err, result) { 
+        console.log(result);
         const storeString : string = Object.keys(result)[0];//Main string
         const store = result[storeString];//Store object
         const groupString : string = Object.keys(store)[0];//Store obj string
         const objs = store[groupString];//Objects array
 
-        objs.forEach((obj: { [s: string]: [v: string]; }) =>{
+        objs.forEach((obj: { [s: string]: [v: string] }) =>{
           if(conditions.length > 0 && values.length === conditions.length){
             for(let i=0; i < conditions.length; i++){
               let op = operators[i];
@@ -78,4 +79,14 @@ export class ParsingService {
       });  
     });  
   }  
+
+  createXML(){
+    const builder = new xml2js.Builder({rootName: 'products'});
+    const store = {
+
+    };
+    const obj = { product: [{'names' : 'Faisal'}] };
+    const xml = builder.buildObject(obj);   
+    console.log(xml);
+  }
 }

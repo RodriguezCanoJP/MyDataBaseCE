@@ -8,6 +8,11 @@ export class ScriptService {
 
   constructor() { }
 
+  /**
+   * @Brief divide los elementos en arreglos para procesar la logica facilmente
+   * @param commands 
+   * @returns 
+   */
   sortScript(commands: string[]){
     var columns:string[] = [],
         conditions:string[] = [], 
@@ -51,9 +56,17 @@ export class ScriptService {
       sorted_commands.push(values);
       
     }
+    else if(commands[0] == 'print'){
+      sorted_commands.push("print");
+    }
     return sorted_commands;
   }
 
+  /**
+   * @Brief Lee un string y lo divide en cadenas cuando esten separadas por un espacio o una nueva linea
+   * @param script 
+   * @returns void
+   */
   readScript(script: string){
     return new Promise(resolve => {
       let splitted: string[] = script.split(/\n| /, 20);

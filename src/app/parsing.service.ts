@@ -21,7 +21,7 @@ export class ParsingService {
       })   
   }  
 
-  parseXML(data: string,columns: string[], conditions: string[], l_operators: string[], operators: string[], values: string[]) {  
+  parseXML(data: string, conditions: string[], l_operators: string[], operators: string[], values: string[]) {  
     return new Promise(resolve => {  
       var k: Object,  
         arr: any = [],  
@@ -41,7 +41,7 @@ export class ParsingService {
             for(let i=0; i < conditions.length; i++){
               let op = operators[i];
               if(op === "="){
-                if(obj[conditions[i]][0] === values[i]){
+                if(obj[conditions[i]][0].toLowerCase() === values[i]){
                   arr.push(obj);
                 }
               }else if(op === ">"){
@@ -54,6 +54,18 @@ export class ParsingService {
                 let cond:number = +obj[conditions[i]][0];
                 let val: number = + values[i];
                 if(cond < val){
+                  arr.push(obj);
+                }
+              }else if(op === "<="){
+                let cond:number = +obj[conditions[i]][0];
+                let val: number = + values[i];
+                if(cond <= val){
+                  arr.push(obj);
+                }
+              }else if(op === ">="){
+                let cond:number = +obj[conditions[i]][0];
+                let val: number = + values[i];
+                if(cond >= val){
                   arr.push(obj);
                 }
               }

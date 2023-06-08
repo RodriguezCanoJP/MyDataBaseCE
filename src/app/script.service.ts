@@ -51,7 +51,6 @@ export class ScriptService {
       sorted_commands.push(values);
       
     }
-    console.log(sorted_commands);
     return sorted_commands;
   }
 

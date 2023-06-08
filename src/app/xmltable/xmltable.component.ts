@@ -21,18 +21,21 @@ export class XmltableComponent{
       this.service.parseXML(data, conditions, l_operators, operators, values)  
         .then(parsed_data => {  
           this.xmlItems =  parsed_data; 
-
-          this.displayedColumns = [];
-          let keys = Object.keys(this.xmlItems[0]);
-          for(let i=0; i < columns.length; i++){
-            if(columns.includes(keys[i])){
-              console.log(true);
-              this.displayedColumns.push(keys[i]);
-            }
-          }
+          this.displayedColumns = this.setColumns(columns);
         }).catch(err => alert(err));
     })
   }
 
-  
+  setColumns(columns: any){
+    let newColumns: string[] = [];
+    let keys = Object.keys(this.xmlItems[0]);
+      keys.forEach(key => {
+        if(columns.includes(key)){
+          console.log(true);
+          newColumns.push(key);
+        }
+      })
+    console.log(newColumns);
+    return newColumns;   
+  }
 }

@@ -10,7 +10,7 @@ export class ParsingService {
   constructor(private _http: HttpClient) {}
 
   loadXML(file:string){  
-    return this._http.get('/xmlstore/' + file + '.xml',  
+    return this._http.get('/assets/' + file + '.xml',  
       {
         headers: new HttpHeaders()  
           .set('Content-Type', 'text/xml')  
@@ -80,12 +80,9 @@ export class ParsingService {
     });  
   }  
 
-  createXML(){
-    const builder = new xml2js.Builder({rootName: 'products'});
-    const store = {
-
-    };
-    const obj = { product: [{'names' : 'Faisal'}] };
+  createXML(objects: {[s: string]: [v: string]}[], store_name : string, object_name: string){
+    const builder = new xml2js.Builder({rootName: store_name});
+    const obj: any = { object_name : objects };
     const xml = builder.buildObject(obj);   
     console.log(xml);
   }

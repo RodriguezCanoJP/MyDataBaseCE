@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ParsingService } from '../parsing.service';
 
 @Component({
@@ -36,6 +36,6 @@ export class XmltableComponent{
   }
 
   printXML(){
-    this.service.createXML();
+    this.service.createXML(this.xmlItems, "Employee", "emp");
   }
 }

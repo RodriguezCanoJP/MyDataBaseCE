@@ -56,8 +56,30 @@ export class ScriptService {
       sorted_commands.push(values);
       
     }
-    else if(commands[0] == 'print'){
-      sorted_commands.push("print");
+    else if(commands[0] == 'insert' && commands[1] == 'into'){
+      let filename = commands[2];
+      let values_idx = commands.indexOf('values');
+
+      if(values_idx == 3){
+        for(let i=3; i<commands.length; i++){
+          values.push(commands[i])
+        }
+      }else{
+        for(let i=3; i<values_idx; i++){
+          conditions.push(commands[i]);
+          values.push(commands[values_idx + i - 2]);
+        }
+      }
+      sorted_commands.push("insert", filename, conditions, values);
+    }
+    else if(commands[0] == 'update'){
+      
+    }else if(commands[0] == 'delete' && commands[1] == 'from'){
+      filename = commands[2];
+      if(commands.length > 3 && commands[3] == 'where'){
+        sorted_commands.push("delete", filename, commands[4], commands[5], commands[6]);
+      }
+      sorted_commands.push("delete", filename);
     }
     return sorted_commands;
   }

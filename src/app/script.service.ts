@@ -59,7 +59,7 @@ export class ScriptService {
     else if(commands[0] == 'insert' && commands[1] == 'into'){
       let filename = commands[2];
       let values_idx = commands.indexOf('values');
-
+    
       if(values_idx == 3){
         for(let i=3; i<commands.length; i++){
           values.push(commands[i])
@@ -72,8 +72,15 @@ export class ScriptService {
       }
       sorted_commands.push("insert", filename, conditions, values);
     }
-    else if(commands[0] == 'update'){
-      
+    else if(commands[0] == 'update' && commands[2] == 'set'){
+      let filename = commands[1];
+      let where_idx: number;
+      if(commands.includes('where')){
+        where_idx = commands.indexOf('where');
+        for (let i = 3; i < where_idx; i++) {
+          console.log(i);
+        }
+      }
     }else if(commands[0] == 'delete' && commands[1] == 'from'){
       filename = commands[2];
       if(commands.length > 3 && commands[3] == 'where'){

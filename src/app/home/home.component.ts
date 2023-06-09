@@ -10,6 +10,7 @@ import { ScriptService } from '../script.service';
 export class HomeComponent {
   public script = '' ;
   private commands: any;
+  private isDisabled: boolean = true;
 
   @ViewChild(XmltableComponent)
   private tableComponentRef!: XmltableComponent;
@@ -21,7 +22,8 @@ export class HomeComponent {
       this.commands = arr;
       if(this.commands[0] == 'select'){
         this.tableComponentRef.showTable(this.commands[1], this.commands[2], this.commands[3], this.commands[4], this.commands[5], this.commands[6])
-      }else if(this.commands[0] == 'print'){
+      }else if(this.commands[0] == 'insert'){
+        this.isDisabled = true;
         this.tableComponentRef.printXML();
       }
       

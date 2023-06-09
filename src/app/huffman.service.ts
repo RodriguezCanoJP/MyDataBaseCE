@@ -18,11 +18,11 @@ export class HuffmanComponent {
   inputText: string;
   encodedText: string;
 
-  // Function to generate the Huffman tree
+  
   generateHuffmanTree(input: string): HuffmanNode {
     const charFrequencyMap = new Map<string, number>();
 
-    // Calculate the frequency of each character
+    
     for (const char of input) {
       if (charFrequencyMap.has(char)) {
         charFrequencyMap.set(char, charFrequencyMap.get(char)! + 1);
@@ -31,13 +31,13 @@ export class HuffmanComponent {
       }
     }
 
-    // Create the initial list of nodes
+    
     const nodes: HuffmanNode[] = [];
     for (const [char, frequency] of charFrequencyMap) {
       nodes.push({ char, frequency });
     }
 
-    // Build the Huffman tree
+    
     while (nodes.length > 1) {
       nodes.sort((a, b) => a.frequency - b.frequency);
 
@@ -57,7 +57,7 @@ export class HuffmanComponent {
     return nodes[0];
   }
 
-  // Function to generate the Huffman codes for each character
+  
   generateHuffmanCodes(node: HuffmanNode, code: string, codesMap: Map<string, string>): void {
     if (!node.left && !node.right) {
       codesMap.set(node.char, code);
@@ -68,7 +68,7 @@ export class HuffmanComponent {
     this.generateHuffmanCodes(node.right!, code + '1', codesMap);
   }
 
-  // Function to encode the input text using Huffman codes
+  
   encode(): void {
     if (!this.inputText) {
       this.encodedText = '';

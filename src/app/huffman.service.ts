@@ -1,5 +1,3 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Injectable } from '@angular/core';
 
 
@@ -14,9 +12,9 @@ interface HuffmanNode {
     providedIn: 'root'
   })
 
-export class HuffmanComponent {
-  inputText: string;
-  encodedText: string;
+export class HuffmanService {
+  inputText: string = '';
+  encodedText: string = '';
 
   
   generateHuffmanTree(input: string): HuffmanNode {

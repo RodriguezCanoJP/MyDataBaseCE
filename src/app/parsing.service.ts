@@ -21,7 +21,7 @@ export class ParsingService {
       })   
   }  
 
-  parseXML(data: string, conditions: string[], l_operators: string[], operators: string[], values: string[]) {  
+  parseXML(data: string, conditions: string[] = [], l_operators: string[] = [], operators: string[]= [], values: string[] = []) {  
     return new Promise(resolve => {  
       var k: Object,  
         arr: any = [],  
@@ -31,56 +31,21 @@ export class ParsingService {
             explicitArray: true  
           });  
       parser.parseString(data, function (err, result) { 
-        console.log(result);
         const storeString : string = Object.keys(result)[0];//Main string
         const store = result[storeString];//Store object
         const groupString : string = Object.keys(store)[0];//Store obj string
         const objs = store[groupString];//Objects array
 
         objs.forEach((obj: { [s: string]: [v: string] }) =>{
-          if(conditions.length > 0 && values.length === conditions.length){
-            for(let i=0; i < conditions.length; i++){
-              let op = operators[i];
-              if(op === "="){
-                if(obj[conditions[i]][0].toLowerCase() === values[i]){
-                  arr.push(obj);
-                }
-              }else if(op === ">"){
-                let cond:number = +obj[conditions[i]][0];
-                let val: number = + values[i];
-                if(cond > val){
-                  arr.push(obj);
-                }
-              }else if(op === "<"){
-                let cond:number = +obj[conditions[i]][0];
-                let val: number = + values[i];
-                if(cond < val){
-                  arr.push(obj);
-                }
-              }else if(op === "<="){
-                let cond:number = +obj[conditions[i]][0];
-                let val: number = + values[i];
-                if(cond <= val){
-                  arr.push(obj);
-                }
-              }else if(op === ">="){
-                let cond:number = +obj[conditions[i]][0];
-                let val: number = + values[i];
-                if(cond >= val){
-                  arr.push(obj);
-                }
-              }
-            }
-          }else{
-            arr.push(obj);
-          }
+          arr.push(obj);
         })
         resolve(arr);  
       });  
     });  
   }  
 
-  createXML(objects: {[s: string]: [v: string]}[], store_name : string, object_name: string){
+
+  createXML(objects: {[s: string]: [v: string]}[], store_name : string, _object_name: string){
     const builder = new xml2js.Builder({rootName: store_name});
     const obj: any = { object_name : objects };
     const xml = builder.buildObject(obj);   

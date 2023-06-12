@@ -22,7 +22,7 @@ export class ScriptService {
         sorted_commands = [],
         filename: string;
 
-    if(commands[0] === "select"){
+    if(commands[0] === "select"){ //select
       let from_idx = commands.indexOf("from");
       filename = commands[from_idx + 1];
       for(let i=1; i < from_idx; i++){
@@ -47,16 +47,10 @@ export class ScriptService {
           }
         }
       }
-      sorted_commands.push("select");
-      sorted_commands.push(filename);
-      sorted_commands.push(columns);
-      sorted_commands.push(conditions);
-      sorted_commands.push(logic_operators);
-      sorted_commands.push(operators);
-      sorted_commands.push(values);
+      sorted_commands.push("select", filename, columns, conditions, logic_operators, operators, values);
       
     }
-    else if(commands[0] == 'insert' && commands[1] == 'into'){
+    else if(commands[0] == 'insert' && commands[1] == 'into'){ // Insert
       let filename = commands[2];
       let values_idx = commands.indexOf('values');
     
@@ -70,18 +64,23 @@ export class ScriptService {
           values.push(commands[values_idx + i - 2]);
         }
       }
-      sorted_commands.push("insert", filename, conditions, values);
+      sorted_commands.push('insert', filename, conditions, values);
     }
-    else if(commands[0] == 'update' && commands[2] == 'set'){
+    else if(commands[0] == 'update' && commands[2] == 'set' && commands.includes('where')){ // update
       let filename = commands[1];
-      let where_idx: number;
-      if(commands.includes('where')){
-        where_idx = commands.indexOf('where');
-        for (let i = 3; i < where_idx; i++) {
-          console.log(i);
-        }
+      let where_idx = commands.indexOf('where');
+
+      for (let i = 3; i < where_idx; i+=3) {
+        columns.push(commands[i]);
+        values.push(commands[i+2]);
       }
-    }else if(commands[0] == 'delete' && commands[1] == 'from'){
+
+      conditions.push(commands[where_idx + 1]);
+      operators.push(commands[where_idx+2]);
+      sorted_commands.push('update', filename, columns, values, commands[where_idx + 1], commands[where_idx + 2], commands[where_idx + 3]);
+      console.log(sorted_commands);
+      
+    }else if(commands[0] == 'delete' && commands[1] == 'from'){ // delete
       filename = commands[2];
       if(commands.length > 3 && commands[3] == 'where'){
         sorted_commands.push("delete", filename, commands[4], commands[5], commands[6]);

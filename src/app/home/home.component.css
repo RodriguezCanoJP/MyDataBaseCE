@@ -76,9 +76,12 @@ p {
     padding: 16px;
     line-height: 24px;
 }
+#tree{
+    overflow: scroll;
+}
 
 #input{
-    flex-basis: 60%;
+    flex:1;
 }
 
 .display{

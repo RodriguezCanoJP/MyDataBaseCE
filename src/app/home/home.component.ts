@@ -61,7 +61,7 @@ export class HomeComponent {
   commit(){
     console.log(this.loaded_files);
     this.loaded_files.forEach(file => {
-      this.parsing_service.createXML(file, "idk", "idke");
+      this.parsing_service.createXML(file, "Employee");
     }) 
     this.isDisabled = true;
   }

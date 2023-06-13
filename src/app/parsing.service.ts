@@ -110,11 +110,8 @@ export class ParsingService {
     const builder = new xml2js.Builder({rootName: store_name});
     const obj: any = { object : objects };
     const xml = builder.buildObject(obj);   
-    console.log(xml);
     var fileObj = new File([xml], '/assets/' + store_name + '.xml');
-    console.log(fileObj);
-
-    // Verifying the contents of the file
+    
     var reader = new FileReader();
     reader.onload = () => {
       console.log('reader', reader.result);      

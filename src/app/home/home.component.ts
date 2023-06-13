@@ -26,7 +26,6 @@ export class HomeComponent {
    * @returns no retorna nada
    */
   sendRequest(){
-    this.isDisabled = false
     this.service.readScript(this.script).then(arr =>{
       this.commands = arr;
       if(this.loaded_titles.includes(this.commands[1])){
@@ -34,10 +33,13 @@ export class HomeComponent {
         if(this.commands[0] == 'select'){
           this.tableComponentRef.showTable(this.object_service.selectFromObject(this.loaded_files[idx], this.commands[3], this.commands[4], this.commands[5], this.commands[6]), this.commands[2])
         }else if(this.commands[0] == 'insert'){
+          this.isDisabled = false
           this.object_service.insertObject(this.loaded_files[idx], this.commands[2], this.commands[3]);
         }else if(this.commands[0] == 'update'){
+          this.isDisabled = false
           this.object_service.updateObject(this.loaded_files[idx], this.commands[2], this.commands[3], this.commands[4], this.commands[5], this.commands[6])
         }else if(this.commands[0] == 'delete'){
+          this.isDisabled = false
           this.object_service.deleteObject(this.loaded_files[idx], this.commands[2], this.commands[3], this.commands[4]);
         }
       }else{
@@ -48,10 +50,13 @@ export class HomeComponent {
               if(this.commands[0] == 'select'){
                 this.tableComponentRef.showTable(this.object_service.selectFromObject(this.file, this.commands[3], this.commands[4], this.commands[5], this.commands[6]), this.commands[2])
               }else if(this.commands[0] == 'insert'){
+                this.isDisabled = false
                 this.object_service.insertObject(this.file, this.commands[2], this.commands[3]);
               }else if(this.commands[0] == 'update'){
+                this.isDisabled = false
                 this.object_service.updateObject(this.file, this.commands[2], this.commands[3], this.commands[4], this.commands[5], this.commands[6])
               }else if(this.commands[0] == 'delete'){
+                this.isDisabled = false
                 this.object_service.deleteObject(this.file, this.commands[2], this.commands[3], this.commands[4]);
               }
               this.loaded_files.push(this.file);

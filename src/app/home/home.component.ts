@@ -21,7 +21,7 @@ export class HomeComponent {
 
   constructor(private service: ScriptService, private parsing_service: ParsingService, private object_service: ObjectService){}
   /**
-   * @brief envia la solicitud para poder ver el archivo
+   * @brief envia la solicitud para hacer cambios al archivo o mostrarlos
    * @param no recibe parametros
    * @returns no retorna nada
    */

@@ -17,7 +17,7 @@ export class ParsingService {
   /**
    * @brief Esta funcion se encarga de cargar los archivos xml
    * @param file 
-   * @returns los archivos xml
+   * @returns observer
    */
   loadXML(file:string){  
     return this._http.get('/assets/' + file + '.xml',  
@@ -34,7 +34,7 @@ export class ParsingService {
   /**
    * @brief se encargar de obtener los atributos de cada archivo
    * @param data 
-   * @returns 
+   * @returns object[]
    */
   getAttributes(data: string){
     return new Promise<any[]>(resolve => {  
@@ -68,7 +68,7 @@ export class ParsingService {
   /**
    * @brief Crea un array con los datos del archuvo
    * @param data 
-   * @returns 
+   * @returns object[]
    */
   parseXML(data: string) {  
     return new Promise(resolve => {  
@@ -105,6 +105,7 @@ export class ParsingService {
    * @brief crea un nuevo archivo xml a partir de un array
    * @param objects 
    * @param store_name 
+   * @returns void
    */
   createXML(objects: {[s: string]: [v: string]}[], store_name : string){
     const builder = new xml2js.Builder({rootName: store_name});

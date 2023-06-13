@@ -1,13 +1,25 @@
 import { Injectable } from '@angular/core';
 
+
+var logic_operations = {
+  '=': function (x:string,y:string) { return x.toLocaleLowerCase() === y },
+  '>': function (x:string, y:string) { return x > y },
+  '<': function (x:string, y:string) { return x < y },
+  '>=': function (x:string, y:string) { return x >= y },
+  '<=': function (x:string, y:string) { return x <= y },
+}​​​​​​​;
+
+type OnlyKeys = keyof typeof logic_operations;
+
 @Injectable({
   providedIn: 'root'
 })
 export class ObjectService {
+  
 
   constructor() { }
   /**
-   * 
+   * @Brief retorna un objeto con las condiciones requridas
    * @param objects 
    * @param conditions 
    * @param l_operators 
@@ -15,42 +27,39 @@ export class ObjectService {
    * @param values 
    * @returns 
    */
-  selectFromObject(objects: {[s: string]: [v: string]}[], conditions: string[], l_operators: string[], operators: string[], values: string[]){
+  selectFromObject(objects: {[s: string]: [v: string]}[], conditions: string[], l_operators: string[], operators: OnlyKeys[], values: string[]){
     var filtered_object: any[] = [];
     objects.forEach((obj: { [s: string]: [v: string] }) =>{
       if(conditions.length > 0 && values.length === conditions.length){
-        for(let i=0; i < conditions.length; i++){
-          let op = operators[i];
-          if(op === "="){
-            if(obj[conditions[i]][0].toLowerCase() === values[i]){
-              filtered_object.push(obj);
-            }
-          }else if(op === ">"){
-            let cond:number = +obj[conditions[i]][0];
-            let val: number = + values[i];
-            if(cond > val){
-              filtered_object.push(obj);
-            }
-          }else if(op === "<"){
-            let cond:number = +obj[conditions[i]][0];
-            let val: number = + values[i];
-            if(cond < val){
-              filtered_object.push(obj);
-            }
-          }else if(op === "<="){
-            let cond:number = +obj[conditions[i]][0];
-            let val: number = + values[i];
-            if(cond <= val){
-              filtered_object.push(obj);
-            }
-          }else if(op === ">="){
-            let cond:number = +obj[conditions[i]][0];
-            let val: number = + values[i];
-            if(cond >= val){
-              filtered_object.push(obj);
-            }
+        if(l_operators.length == 1 && l_operators[0] == 'and'){
+          if(logic_operations[operators[0]](obj[conditions[0]][0],values[0]) && logic_operations[operators[1]](obj[conditions[1]][0],values[1])){
+            filtered_object.push(obj);
           }
-        }
+        }else if(l_operators.length == 1 && l_operators[0] == 'or'){
+          if(logic_operations[operators[0]](obj[conditions[0]][0],values[0]) || logic_operations[operators[1]](obj[conditions[1]][0],values[1])){
+            filtered_object.push(obj);
+          }
+        }else if(l_operators.length == 2 && l_operators[0] == 'and' && l_operators[1] == 'and'){
+          if(logic_operations[operators[0]](obj[conditions[0]][0],values[0]) && logic_operations[operators[1]](obj[conditions[1]][0],values[1]) && logic_operations[operators[2]](obj[conditions[2]][0],values[2])){
+            filtered_object.push(obj);
+          }
+        }else if(l_operators.length == 2 && l_operators[0] == 'or' && l_operators[1] == 'or'){
+          if(logic_operations[operators[0]](obj[conditions[0]][0],values[0]) || logic_operations[operators[1]](obj[conditions[1]][0],values[1]) || logic_operations[operators[2]](obj[conditions[2]][0],values[2])){
+            filtered_object.push(obj);
+          }
+        }else if(l_operators.length == 2 && l_operators[0] == 'or' && l_operators[1] == 'and'){
+          if(logic_operations[operators[0]](obj[conditions[0]][0],values[0]) || logic_operations[operators[1]](obj[conditions[1]][0],values[1]) && logic_operations[operators[2]](obj[conditions[2]][0],values[2])){
+            filtered_object.push(obj);
+          }
+        }else if(l_operators.length == 2 && l_operators[0] == 'and' && l_operators[1] == 'or'){
+          if(logic_operations[operators[0]](obj[conditions[0]][0],values[0]) && logic_operations[operators[1]](obj[conditions[1]][0],values[1]) || logic_operations[operators[2]](obj[conditions[2]][0],values[2])){
+            filtered_object.push(obj);
+          }
+        }else if(l_operators[0] !== ''){
+          if(logic_operations[operators[0]](obj[conditions[0]][0],values[0])){
+            filtered_object.push(obj);
+          }
+        }    
       }else{
         filtered_object.push(obj);
       }
@@ -64,8 +73,13 @@ export class ObjectService {
    * @param values 
    */
   insertObject(objects: {[s: string]: [v: string]}[], conditions: string[], values: string[]){
+    const keys = Object.keys(objects[0]);
+    const iterations = values.length/keys.length;
+
     const obj = JSON.parse(JSON.stringify(objects[0]));
-    Object.keys(obj).forEach((i) => obj[i] = "null");
+    
+
+    keys.forEach((i) => obj[i] = "null");
     for (let i = 0; i < conditions.length; i++) {
       obj[conditions[i]] = values[i];
     }

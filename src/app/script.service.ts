@@ -61,7 +61,9 @@ export class ScriptService {
       }else{
         for(let i=3; i<values_idx; i++){
           conditions.push(commands[i]);
-          values.push(commands[values_idx + i - 2]);
+        }
+        for(let i=values_idx+1; i<commands.length; i++){
+          values.push(commands[i])
         }
       }
       sorted_commands.push('insert', filename, conditions, values);

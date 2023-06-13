@@ -11,7 +11,6 @@ import * as xml2js from 'xml2js';
 })
 
 export class SignupComponent {
-  Roles: any = ['Admin', 'Author', 'Reader'];
   constructor(){}
 
   password: string;

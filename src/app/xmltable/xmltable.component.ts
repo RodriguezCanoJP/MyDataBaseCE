@@ -14,7 +14,7 @@ export class XmltableComponent{
    * @brief se encarga de mostrar la tabla con los archivos
    * @param objects 
    * @param columns 
-   * @returns no retorna nada
+   * @returns void
    */
   showTable(objects: {[s: string]: [v: string]}[], columns: string[]){
     this.xmlItems = objects;
@@ -22,9 +22,9 @@ export class XmltableComponent{
   }
   
   /**
-   * 
+   * @Brief segun el script, muestra las columnas necesarias
    * @param columns 
-   * @returns 
+   * @returns string[]
    */
   setColumns(columns: any){
     let newColumns: string[] = [];

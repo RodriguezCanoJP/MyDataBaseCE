@@ -16,7 +16,11 @@ export class HuffmanService {
   inputText: string = '';
   encodedText: string = '';
 
-  
+  /**
+   * @brief genera un nuevo arbol a partir de un texto
+   * @param input 
+   * @returns el nodo en la posicion 0
+   */
   generateHuffmanTree(input: string): HuffmanNode {
     const charFrequencyMap = new Map<string, number>();
 
@@ -55,7 +59,13 @@ export class HuffmanService {
     return nodes[0];
   }
 
-  
+  /**
+   * @brief genera los codigos para la compresion
+   * @param node 
+   * @param code 
+   * @param codesMap 
+   * @returns 
+   */
   generateHuffmanCodes(node: HuffmanNode, code: string, codesMap: Map<string, string>): void {
     if (!node.left && !node.right) {
       codesMap.set(node.char, code);
@@ -66,7 +76,11 @@ export class HuffmanService {
     this.generateHuffmanCodes(node.right!, code + '1', codesMap);
   }
 
-  
+  /**
+   * @brief comprime la cadena de texto dada
+   * @param no recibe parametros
+   * @returns 
+   */
   encode(): void {
     if (!this.inputText) {
       this.encodedText = '';

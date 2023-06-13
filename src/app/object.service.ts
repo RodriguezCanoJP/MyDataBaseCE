@@ -6,7 +6,15 @@ import { Injectable } from '@angular/core';
 export class ObjectService {
 
   constructor() { }
-
+  /**
+   * 
+   * @param objects 
+   * @param conditions 
+   * @param l_operators 
+   * @param operators 
+   * @param values 
+   * @returns 
+   */
   selectFromObject(objects: {[s: string]: [v: string]}[], conditions: string[], l_operators: string[], operators: string[], values: string[]){
     var filtered_object: any[] = [];
     objects.forEach((obj: { [s: string]: [v: string] }) =>{
@@ -49,7 +57,12 @@ export class ObjectService {
     }) 
     return filtered_object; 
   }
-
+  /**
+   * 
+   * @param objects 
+   * @param conditions 
+   * @param values 
+   */
   insertObject(objects: {[s: string]: [v: string]}[], conditions: string[], values: string[]){
     const obj = JSON.parse(JSON.stringify(objects[0]));
     Object.keys(obj).forEach((i) => obj[i] = "null");
@@ -58,7 +71,15 @@ export class ObjectService {
     }
     objects.push(obj);
   }
-
+  /**
+   * @brief actualiza el valor de un objeto
+   * @param objects 
+   * @param columns 
+   * @param values 
+   * @param conditions 
+   * @param operator 
+   * @param where_value 
+   */
   updateObject(objects: {[s: string]: [v: string]}[], columns: string[], values: string[], conditions: string, operator: string, where_value: string){
     objects.forEach(obj => {
       for (let i = 0; i < columns.length; i++) {
@@ -94,7 +115,13 @@ export class ObjectService {
       }
     })
   }
-
+  /**
+   * @brief elimina un objeto dado
+   * @param objects 
+   * @param condition 
+   * @param operator 
+   * @param value 
+   */
   deleteObject(objects: {[s: string]: [v: string]}[], condition: string, operator: string, value: string){
     for (let i = 0; i < objects.length; i++) {
       let obj = objects[i];

@@ -17,6 +17,9 @@ export class SignupComponent {
   password: string;
   myInstance: HuffmanService = new HuffmanService();
 
+  /**
+   * @brief se encarga de llamar a 
+   */
   createHuffman(){
     console.log("asies");
     console.log(this.password);
@@ -26,7 +29,7 @@ export class SignupComponent {
     console.log(this.myInstance.encodedText); // encode
 
     if (this.myInstance.encodedText == '01011100101110'){
-      console.log("Hola");
+      console.log("Contraseñas iguales");
     }
 
     

@@ -11,7 +11,7 @@ export class ScriptService {
   /**
    * @Brief divide los elementos en arreglos para procesar la logica facilmente
    * @param commands 
-   * @returns 
+   * @returns los comandos ordenados
    */
   sortScript(commands: string[]){
     var columns:string[] = [],

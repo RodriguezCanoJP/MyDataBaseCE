@@ -18,7 +18,9 @@ export class SignupComponent {
   myInstance: HuffmanService = new HuffmanService();
 
   /**
-   * @brief se encarga de llamar a 
+   * @brief se encarga de llamar a la funcion para poder comprimir la contraseña
+   * @param no recibe parametros
+   * @return no retorna nada
    */
   createHuffman(){
     console.log("asies");

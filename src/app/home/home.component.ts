@@ -20,7 +20,11 @@ export class HomeComponent {
   private tableComponentRef!: XmltableComponent;
 
   constructor(private service: ScriptService, private parsing_service: ParsingService, private object_service: ObjectService){}
-
+  /**
+   * @brief envia la solicitud para poder ver el archivo
+   * @param no recibe parametros
+   * @returns no retorna nada
+   */
   sendRequest(){
     this.isDisabled = false
     this.service.readScript(this.script).then(arr =>{
@@ -57,7 +61,11 @@ export class HomeComponent {
       }
     }).catch(err => alert(err));
   }
-
+  /**
+   * @brief envia los cambios
+   * @param no recibe parametros
+   * @returns no retorna nada
+   */
   commit(){
     console.log(this.loaded_files);
     this.loaded_files.forEach(file => {

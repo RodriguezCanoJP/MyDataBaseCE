@@ -1,4 +1,5 @@
 #include <arduino-timer.h>
+extern volatile unsigned long timer0_millis;
 
 auto timer = timer_create_default();
 Timer<> default_timer;
@@ -33,13 +34,30 @@ void setup() {
 }
 
 void loop() {
-  
   // put your main code here, to run repeatedly:
   int buttonState = digitalRead(pushButton);
+  noInterrupts();
   if(buttonState == HIGH){
+    /*
     timer.in(500,Serial.print("."));
     timer.in(250,Serial.print("-"));
     timer.every(100,Serial.println(""));
+    */
+    if(millis()<=500){
+      Serial.print(".");
+      delay(100);
+      timer0_millis = 0;
+    
+      }
+    if((millis()>=500) && (millis()<= 1000)){
+      Serial.print("-");
+      delay(100);
+      timer0_millis = 0;
+    
+      }
+    
+    interrupts();
+      
     delay(100);
     }else{
       Serial.println("");

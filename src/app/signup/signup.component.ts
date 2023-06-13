@@ -14,16 +14,20 @@ export class SignupComponent {
   Roles: any = ['Admin', 'Author', 'Reader'];
   constructor(){}
 
-  password!: string;
-  myInstance!: HuffmanService;
+  password: string;
+  myInstance: HuffmanService = new HuffmanService();
 
   createHuffman(){
-    
-    this.myInstance = new HuffmanService();
-    this.myInstance.generateHuffmanTree(this.password); // generate
+    console.log("asies");
+    console.log(this.password);
+    //console.log(this.myInstance.inputText);
     this.myInstance.inputText = this.password; // input
     this.myInstance.encode(); // encode
     console.log(this.myInstance.encodedText); // encode
+
+    if (this.myInstance.encodedText == '01011100101110'){
+      console.log("Hola");
+    }
 
     
   }

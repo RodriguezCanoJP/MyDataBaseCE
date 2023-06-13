@@ -1,8 +1,5 @@
-#include <arduino-timer.h>
 extern volatile unsigned long timer0_millis;
 
-auto timer = timer_create_default();
-Timer<> default_timer;
 
 // Se nombran los puertos con sus respectivas variables
 int pushButton = 2;
@@ -38,28 +35,25 @@ void loop() {
   int buttonState = digitalRead(pushButton);
   noInterrupts();
   if(buttonState == HIGH){
-    /*
-    timer.in(500,Serial.print("."));
-    timer.in(250,Serial.print("-"));
-    timer.every(100,Serial.println(""));
-    */
     if(millis()<=500){
-      Serial.print(".");
-      delay(100);
       timer0_millis = 0;
+      interrupts();
     
-      }
-    if((millis()>=500) && (millis()<= 1000)){
       Serial.print("-");
-      delay(100);
-      timer0_millis = 0;
-    
-      }
-    
-    interrupts();
       
-    delay(100);
+      }
+    if(millis()>=500){
+      timer0_millis = 0;
+      interrupts();
+    
+      Serial.print(".");
+      
+      }
+      
+    delay(500);
     }else{
+      timer0_millis = 0;
+      interrupts();
       Serial.println("");
       delay(1000);
       }
